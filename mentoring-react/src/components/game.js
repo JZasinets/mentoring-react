@@ -64,7 +64,12 @@ class Game extends React.Component {
             const desc = move ?
                 `Перейти к ходу # ${move}. Позиция [${step.positionColumn}, ${step.positionRow}].` :
                 'К началу игры';
-            return <MovesButtons stepNumber={this.state.stepNumber} desc={desc} move={move} jumpTo={this.jumpTo}/>;
+            return <MovesButtons
+                stepNumber={this.state.stepNumber}
+                desc={desc}
+                move={move}
+                jumpTo={this.jumpTo}
+            />;
         });
 
         let status;
