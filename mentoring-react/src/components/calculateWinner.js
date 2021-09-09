@@ -1,4 +1,4 @@
-function calculateWinner(squares) {
+let calculateWinner = (squares) => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -9,12 +9,12 @@ function calculateWinner(squares) {
         [0, 4, 8],
         [2, 4, 6],
     ];
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+    for (let square = 0; square < lines.length; square++) {
+        const [firstSquare, secondSquare, thirdSquare] = lines[square];
+        if (squares[firstSquare] && squares[firstSquare] === squares[secondSquare] && squares[firstSquare] === squares[thirdSquare]) {
             return {
-                winner: squares[a],
-                winLine: lines[i],
+                winner: squares[firstSquare],
+                winLine: lines[square],
             };
         }
     }

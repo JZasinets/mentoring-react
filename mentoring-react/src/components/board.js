@@ -24,13 +24,13 @@ class Board extends React.Component {
         return boardRow;
     }
 
-    renderSquare(i) {
+    renderSquare(square) {
         return (
             <Square
-                key={i}
-                value={this.props.squares[i]}
-                onClick={() => this.props.onClick(i)}
-                winner={this.props.winner && this.props.winner.includes(i)}
+                key={square}
+                value={this.props.squares[square]}
+                onClick={() => this.props.onClick(square)}
+                winner={(this.props.winner && this.props.winner.includes(square)) ? true : false}
             />
         );
     }

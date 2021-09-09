@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import Game from './components/game';
 
-function App() {
+let App = () => {
     return (
         <Game />
     );
