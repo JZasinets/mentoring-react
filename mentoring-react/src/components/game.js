@@ -1,7 +1,7 @@
 import React from 'react';
 import calculateWinner from './calculateWinner';
 import Board from './board';
-import moves from './movesButtons';
+import MovesButtons from './movesButtons';
 
 class Game extends React.Component {
     constructor(props) {
@@ -59,6 +59,13 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
+
+        const moves = history.map((step, move) => {
+            const desc = move ?
+                `Перейти к ходу # ${move}. Позиция [${step.positionColumn}, ${step.positionRow}].` :
+                'К началу игры';
+            return <MovesButtons stepNumber={this.state.stepNumber} desc={desc} move={move} jumpTo={this.jumpTo}/>;
+        });
 
         let status;
         if (winner) {

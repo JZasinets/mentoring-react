@@ -1,17 +1,14 @@
-const moves = history.map((step, move) => {
-    const desc = move ?
-        `Перейти к ходу # ${move}. Позиция [${step.positionColumn}, ${step.positionRow}].` :
-        'К началу игры';
+const MovesButtons = (props) => {
     return (
-        <li key={move}>
+        <li key={props.move}>
             <button
-                onClick={() => {this.jumpTo(move)}}
-                className={(this.state.stepNumber === move) ? "activeButton" : "inactiveButton" }
+                onClick={() => {props.jumpTo(props.move)}}
+                className={(props.stepNumber === props.move) ? "activeButton" : "inactiveButton" }
             >
-                {desc}
+                {props.desc}
             </button>
         </li>
     );
-});
+};
 
-export default moves;
+export default MovesButtons;
