@@ -40,6 +40,10 @@ ol, ul {
     background: #ddd;
 }
 
+.square-win {
+    background-color: lightgreen;
+}
+
 .game {
     display: flex;
     flex-direction: row;

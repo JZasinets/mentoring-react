@@ -11,6 +11,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            sortHistory: true,
         }
     }
 
@@ -43,6 +44,12 @@ class Game extends React.Component {
         });
     }
 
+    sortHandleClick() {
+        this.setState({
+            sortHistory: !this.state.sortHistory,
+        });
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
@@ -66,11 +73,18 @@ class Game extends React.Component {
 
         let status;
         if (winner) {
-            status = 'Выиграл: ' + winner;
+            status = 'Выиграл: ' + winner.winner;
         } else if (!current.squares.includes(null)) {
             status = 'Игра окончилась вничью';
         } else {
             status = 'Следующий код: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
+
+        let sortButton;
+        if (this.state.sortHistory) {
+            sortButton = 'По убыванию';
+        } else {
+            sortButton = 'По возрастанию';
         }
 
         return (
@@ -79,11 +93,13 @@ class Game extends React.Component {
                     <Board
                         squares = {current.squares}
                         onClick = {(i) => this.handleClick(i)}
+                        winner={winner && winner.winLine}
                     />
                 </div>
                 <div className="game-info">
                     <div>{ status }</div>
-                    <ol>{ moves }</ol>
+                    <button onClick={() => this.sortHandleClick()}>{ sortButton }</button>
+                    <ol>{ this.state.sortHistory ? moves : moves.reverse() }</ol>
                 </div>
             </div>
         );

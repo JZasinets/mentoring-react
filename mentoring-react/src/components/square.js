@@ -1,7 +1,7 @@
 function Square(props) {
     return (
         <button
-            className="square"
+            className={`square ${(props.winner) ? "square-win" : ""}` }
             onClick={props.onClick}
         >
             {props.value}
