@@ -16,7 +16,7 @@ class Game extends React.Component {
         }
     }
 
-    handleClick(square) {
+    handleClick = (square) => {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -38,29 +38,25 @@ class Game extends React.Component {
         });
     }
 
-    jumpTo(step) {
+    jumpTo = (step) => {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
         });
     }
 
-    sortHandleClick() {
+    sortHandleClick = () => {
         this.setState({
             sortHistory: !this.state.sortHistory,
         });
     }
 
-    getSortHistory(moves) {
+    getSortHistory = (moves) => {
         return this.state.sortHistory ? moves : moves.reverse();
     }
 
-    render() {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
-        const winner = calculateWinner(current.squares);
-
-        const moves = history.map((step, move) => {
+    getMoves = (history) => {
+        const movesHistory = history.map((step, move) => {
             const desc = move ?
                 `Перейти к ходу # ${move}. Позиция [${step.positionColumn}, ${step.positionRow}].` :
                 'К началу игры';
@@ -68,9 +64,18 @@ class Game extends React.Component {
                 stepNumber={this.state.stepNumber}
                 desc={desc}
                 move={move}
-                jumpTo={this.jumpTo}
+                jumpTo={() => this.jumpTo(move)}
+                key={move}
             />;
         });
+        return movesHistory;
+    };
+
+    render = () => {
+        const history = this.state.history;
+        const current = history[this.state.stepNumber];
+        const winner = calculateWinner(current.squares);
+        const moves = this.getMoves(history);
 
         let status;
         if (winner) {
@@ -93,13 +98,13 @@ class Game extends React.Component {
                 <div className="game-board">
                     <Board
                         squares = {current.squares}
-                        onClick = {(event) => this.handleClick(event)}
-                        winner={winner && winner.winLine}
+                        onClick = {this.handleClick}
+                        winner={winner?.winLine}
                     />
                 </div>
                 <div className="game-info">
                     <div>{ status }</div>
-                    <button onClick={() => this.sortHandleClick()}>{ sortButton }</button>
+                    <button onClick={this.sortHandleClick}>{ sortButton }</button>
                     <ol>{this.getSortHistory(moves)}</ol>
                 </div>
             </div>

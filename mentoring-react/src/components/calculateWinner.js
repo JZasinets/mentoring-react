@@ -10,10 +10,10 @@ let calculateWinner = (squares) => {
         [2, 4, 6],
     ];
     for (let square = 0; square < lines.length; square++) {
-        const [firstSquare, secondSquare, thirdSquare] = lines[square];
-        if (squares[firstSquare] && squares[firstSquare] === squares[secondSquare] && squares[firstSquare] === squares[thirdSquare]) {
+        const [first, second, third] = lines[square];
+        if (squares[first] && squares[first] === squares[second] && squares[first] === squares[third]) {
             return {
-                winner: squares[firstSquare],
+                winner: squares[first],
                 winLine: lines[square],
             };
         }

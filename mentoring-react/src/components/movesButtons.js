@@ -1,14 +1,19 @@
-const MovesButtons = (props) => {
+import React from 'react';
+import {useMemo} from 'react';
+
+const MovesButtons = React.memo(({ move, stepNumber, desc, jumpTo }) => {
+    const chooseClassButton = useMemo(() => (stepNumber === move) ? "activeButton" : "inactiveButton", [stepNumber, move]);
+
     return (
-        <li key={props.move}>
+        <li key={move}>
             <button
-                onClick={() => {props.jumpTo(props.move)}}
-                className={(props.stepNumber === props.move) ? "activeButton" : "inactiveButton" }
+                onClick={() => {jumpTo(move)}}
+                className={chooseClassButton}
             >
-                {props.desc}
+                {desc}
             </button>
         </li>
     );
-};
+});
 
 export default MovesButtons;

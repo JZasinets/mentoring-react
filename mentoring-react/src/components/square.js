@@ -1,12 +1,12 @@
 import React from 'react';
 
-let Square = React.memo((props) => {
+const Square = React.memo(({ winner, onClick, value }) => {
     return (
         <button
-            className={`square ${(props.winner) ? "square-win" : ""}` }
-            onClick={props.onClick}
+            className={`square ${(winner) ? "square-win" : ""}` }
+            onClick={onClick}
         >
-            {props.value}
+            {value}
         </button>
     );
 })

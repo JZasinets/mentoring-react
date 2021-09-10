@@ -2,7 +2,7 @@ import React from 'react';
 import Square from './square';
 
 class Board extends React.Component {
-    renderBoard() {
+    renderBoard = () => {
         let boardSquares = [];
         for (let row = 0; row < 3; row++) {
             boardSquares = [...boardSquares, (
@@ -15,7 +15,7 @@ class Board extends React.Component {
         return boardSquares;
     }
 
-    renderRow(row) {
+    renderRow = (row) => {
         let boardRow = [];
         for (let column = 0; column < 3; column++) {
             boardRow = [...boardRow, this.renderSquare((row * 3) + column)];
@@ -24,18 +24,18 @@ class Board extends React.Component {
         return boardRow;
     }
 
-    renderSquare(square) {
+    renderSquare = (square) => {
         return (
             <Square
                 key={square}
                 value={this.props.squares[square]}
                 onClick={() => this.props.onClick(square)}
-                winner={(this.props.winner && this.props.winner.includes(square)) ? true : false}
+                winner={(this.props.winner?.includes(square))}
             />
         );
     }
 
-    render() {
+    render = () => {
         return (
             <div>
                 {this.renderBoard()}
