@@ -40,6 +40,10 @@ ol, ul {
     background: #ddd;
 }
 
+.square-win {
+    background-color: lightgreen;
+}
+
 .game {
     display: flex;
     flex-direction: row;
@@ -47,4 +51,12 @@ ol, ul {
 
 .game-info {
     margin-left: 20px;
+}
+
+.inactiveButton {
+    font-weight: normal;
+}
+
+.activeButton {
+    font-weight: bold;
 }
