@@ -142,4 +142,12 @@ ol, ul {
         margin-bottom: 15px;
         font: 16px 'Arial', sans-serif;
     }
+
+    &-display {
+        font: 16px 'Arial', sans-serif;
+
+        span {
+            font-weight: bold;
+        }
+    }
 }

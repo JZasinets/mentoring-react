@@ -8,11 +8,11 @@ const DisplayWeather = React.memo(({city, code, description, temp, minimumTemp, 
     return (
         <>
             { city && code ?
-                <div>
-                    <p>Погода в городе {city}, {code}: {description};</p>
-                    <p>Текущая температура: {valueTemperature(temp)}°C;</p>
-                    <p>Минимальная температура сегодня: {valueTemperature(minimumTemp)}°C;</p>
-                    <p>Максимальная температура сегодня: {valueTemperature(maximumTemp)}°C.</p>
+                <div className="weather-display">
+                    <p>Погода в городе <span>{city}</span>, <span>{code}</span>: <span>{description}</span>;</p>
+                    <p>Текущая температура: <span>{valueTemperature(temp)}°C</span>;</p>
+                    <p>Минимальная температура сегодня: <span>{valueTemperature(minimumTemp)}°C</span>;</p>
+                    <p>Максимальная температура сегодня: <span>{valueTemperature(maximumTemp)}°C</span>.</p>
                 </div>
                 :
                 <div>{error}</div>
