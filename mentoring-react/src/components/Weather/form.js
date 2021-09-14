@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Form = ({getWeather}) => {
-    const refreshResults = ({ getWeather }) => {
+const Form = ({ getWeather }) => {
+    const refreshResults = () => {
         return getWeather;
     }
 

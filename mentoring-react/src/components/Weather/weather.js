@@ -57,7 +57,11 @@ class Weather extends React.Component {
         return (
             <div className='weather'>
                 <div className='header'>Прогноз погоды</div>
-                <Form getWeather={this.getWeather}/>
+                <Form
+                    getWeather={this.getWeather}
+                    city={this.state.city}
+                    code={this.state.code}
+                />
                 <DisplayWeather
                     city={this.state.city}
                     code={this.state.code}
