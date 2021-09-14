@@ -18,32 +18,45 @@ class Weather extends React.Component {
 
     getWeather = async (event) => {
         event.preventDefault();
-        let cityName = event.target.cityName.value;
-        let countryCode = event.target.countryCode.value;
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&lang=ru&appid=136a1286295ce51ceabf7e5462f4a04a`);
-        const data = await response.json();
+        const cityName = event.target.cityName.value;
+        const countryCode = event.target.countryCode.value;
+        const cityInfo = cityName + ' ' + countryCode;
 
-        if (cityName && countryCode) {
-           try {
-               this.setState({
-                   city: data.name,
-                   code: data.sys.country,
-                   description: data.weather[0]['description'],
-                   temp: data.main.temp,
-                   minimumTemp: data.main.temp_min,
-                   maximumTemp: data.main.temp_max,
-                   error: undefined,
-               })
-            } catch (error) {
-               this.setState({
-                   error: 'Убедитесь в правильности данных',
-               })
+        const isContainsSymbols = /[~`!#$%\^&*+=\[\]\\';/{}|\\":<>\?]/g.test(cityInfo);
+        const isContainsNumbers = /\d/.test(cityInfo);
+
+        const checkError = (mistake, errorContent) => {
+            if (mistake) {
+                return this.setState({
+                    city: undefined,
+                    code: undefined,
+                    error: errorContent,
+                })
             }
-        } else {
+        }
+
+        checkError(!cityName || !countryCode , 'Вы не ввели название города и/или код страны');
+        checkError(isContainsNumbers || isContainsSymbols , 'Проверьте корректность введённых данных данных');
+        checkError(countryCode.length > 2 , 'Код страны не может содержать больше 2-х букв');
+        checkError(countryCode !== countryCode.toUpperCase() , 'Код страны введён не прописными буквами');
+
+        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&lang=ru&appid=136a1286295ce51ceabf7e5462f4a04a`);;
+        const data = await response.json()
+        try {
+            this.setState({
+                city: data.name,
+                code: data.sys.country,
+                description: data.weather[0]['description'],
+                temp: data.main.temp,
+                minimumTemp: data.main.temp_min,
+                maximumTemp: data.main.temp_max,
+                error: undefined,
+            })
+        } catch (error) {
             this.setState({
                 city: undefined,
                 code: undefined,
-                error: 'Вы не ввели название города и код страны',
+                error: 'Убедитесь в правильности введённых данных',
             })
         }
     }
