@@ -1,13 +1,14 @@
 import React from 'react';
+import { useCallback } from 'react';
 
 const DisplayWeather = React.memo(({city, code, description, temp, minimumTemp, maximumTemp, error}) => {
-    const valueTemperature = (value) => {
+    const valueTemperature = useCallback((value) => {
         return Math.round(value - 273);
-    };
+    }, []);
 
     return (
         <>
-            { city && code ?
+            { Boolean(city && code) ?
                 <div className="weather-display">
                     <p>Погода в городе <span>{city}</span>, <span>{code}</span>: <span>{description}</span>;</p>
                     <p>Текущая температура: <span>{valueTemperature(temp)}°C</span>;</p>

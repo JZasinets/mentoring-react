@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = () => {
+const Navbar = React.memo(() => {
     return (
         <div className="navbar">
             <div>
@@ -11,6 +11,6 @@ const Navbar = () => {
             </div>
         </div>
     )
-}
+});
 
 export default Navbar;

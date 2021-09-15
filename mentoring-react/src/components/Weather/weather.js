@@ -6,13 +6,13 @@ class Weather extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: undefined,
-            code: undefined,
-            description: undefined,
-            temp: undefined,
-            minimumTemp: undefined,
-            maximumTemp: undefined,
-            error: undefined,
+            city: null,
+            code: null,
+            description: null,
+            temp: null,
+            minimumTemp: null,
+            maximumTemp: null,
+            error: null,
         }
     }
 
@@ -26,8 +26,8 @@ class Weather extends React.Component {
 
         const checkError = (errorContent) => {
             this.setState({
-                    city: undefined,
-                    code: undefined,
+                    city: null,
+                    code: null,
                     error: errorContent,
                 })
         }
