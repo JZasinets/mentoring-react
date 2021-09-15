@@ -18,11 +18,22 @@ class Weather extends React.Component {
 
     getWeather = async (event) => {
         event.preventDefault();
-        const cityName = event.target.cityName.value;
-        const countryCode = event.target.countryCode.value;
+        this.setState({
+            city: null,
+            code: null,
+            description: null,
+            temp: null,
+            minimumTemp: null,
+            maximumTemp: null,
+            error: null,
+        })
+        const cityName = event.target.cityName.value.replace(/\s+/g,' ').trim();
+        const countryCode = event.target.countryCode.value.replace(/\s+/g,'').trim();
         const cityInfo = cityName + ' ' + countryCode;
         const isContainsSymbols = /[~`!#$%^&*+=[\]\\';/{}|":<>?]/g.test(cityInfo);
         const isContainsNumbers = /\d/.test(cityInfo);
+
+        console.log(countryCode + cityName)
 
         const checkError = (errorContent) => {
             this.setState({
@@ -59,17 +70,10 @@ class Weather extends React.Component {
                 <div className='header'>Прогноз погоды</div>
                 <Form
                     getWeather={this.getWeather}
-                    city={this.state.city}
-                    code={this.state.code}
+                    {...this.state}
                 />
                 <DisplayWeather
-                    city={this.state.city}
-                    code={this.state.code}
-                    description={this.state.description}
-                    temp={this.state.temp}
-                    minimumTemp={this.state.minimumTemp}
-                    maximumTemp={this.state.maximumTemp}
-                    error={this.state.error}
+                    {...this.state}
                 />
             </div>
         )
