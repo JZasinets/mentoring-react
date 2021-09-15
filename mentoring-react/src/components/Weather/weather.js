@@ -33,8 +33,6 @@ class Weather extends React.Component {
         const isContainsSymbols = /[~`!#$%^&*+=[\]\\';/{}|":<>?]/g.test(cityInfo);
         const isContainsNumbers = /\d/.test(cityInfo);
 
-        console.log(countryCode + cityName)
-
         const checkError = (errorContent) => {
             this.setState({
                     city: null,

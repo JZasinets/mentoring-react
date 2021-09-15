@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 const Form = React.memo(({ getWeather }) => {
     const onRefresh = useCallback(() => {
         return getWeather;
-    }, [])
+    }, [getWeather])
 
     return (
         <>
