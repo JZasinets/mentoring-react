@@ -9,6 +9,9 @@ const Navbar = React.memo(() => {
             <div>
                 <a href="/game">Игра</a>
             </div>
+            <div>
+                <a href="/todo">Todos</a>
+            </div>
         </div>
     )
 });

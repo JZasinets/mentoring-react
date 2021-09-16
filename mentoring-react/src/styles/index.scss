@@ -6,6 +6,7 @@
 body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
+    background-color: #f5f5f5;
 }
 
 .app-wrapper {
@@ -150,4 +151,48 @@ ol, ul {
             font-weight: bold;
         }
     }
+}
+
+//todos
+.todo {
+    width: 30%;
+    min-width: 500px;
+    margin-left: 35%;
+
+    &-header {
+        width: 100%;
+        text-align: center;
+        margin: 50px 0;
+        font: 100px 'Arial';
+        font-weight: 500;
+        color: rgba(175, 47, 47, 0.15);
+    }
+
+    &-list {
+        box-shadow: 0px 8px 27px 3px rgba(34, 60, 80, 0.2);
+        min-width: 500px;
+    }
+
+    input {
+        width: 100%;
+        padding: 16px;
+        font-size: 24px;
+        line-height: 1.4em;
+        box-shadow:  0 2px 5px 0 rgba(34, 60, 80, 0.2);
+        border: none;
+        height: 2rem;
+        margin-right: 15px;
+        outline: none;
+        color: #999999;
+
+        &::placeholder {
+            color: rgba(175, 47, 47, 0.15);
+            font-style: italic;
+        }
+    }
+}
+
+.list-wrapper {
+    width: 100%;
+    background-color: white;
 }
