@@ -94,7 +94,7 @@ class Game extends React.Component {
         }
 
         return (
-            <>
+            <div>
                 <div className='header'>Игра крестики-нолики</div>
                 <div className="game">
                     <div className="game-board">
@@ -110,7 +110,7 @@ class Game extends React.Component {
                         <ol>{this.getSortHistory(moves)}</ol>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 }

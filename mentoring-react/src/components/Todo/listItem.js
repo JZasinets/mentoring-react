@@ -1,11 +1,26 @@
 import React from 'react';
+import { useCallback } from 'react';
 
-const Item = React.memo(({value}) => {
+const TodoItem = React.memo(({value, complete, deleteTodoItem, editDoubleClick, isEdit, editTodoItem}) => {
     return (
-        <li>
-            {value}
+        <li className='list-item'>
+            <div className='item-wrapper'>
+                <input
+                    type="checkbox"
+                    className='input-item'
+                    checked={TodoItem.complete}
+                    onChange={() => complete(this.TodoItem.item)}
+                    />
+                {
+                    Boolean(isEdit) ?
+                        <input value={value} name='editListValue' autoFocus/>
+                        :
+                        <label className='label-item' onDoubleClick={editDoubleClick}>{value}</label>
+                }
+                <button className='button-item' onClick={deleteTodoItem}>x</button>
+            </div>
         </li>
     );
 })
 
-export default Item;
+export default TodoItem;
