@@ -3,9 +3,12 @@ import store from './store';
 
 const AddItem = React.memo(() => {
     return (
-        <form onSubmit={store.addTodoItem}>
-            <input type='text' name='itemListValue' className='todo-create' placeholder='What needs to be done?'/>
-        </form>
+        <div className='todo-input'>
+            <button className='button-all' onClick={store.completedAll}>✓</button>
+            <form className='form-input' onSubmit={store.addTodoItem}>
+                <input type='text' name='itemListValue' className='todo-create' placeholder='What needs to be done?'/>
+            </form>
+        </div>
     )
 })
 

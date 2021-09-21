@@ -5,8 +5,8 @@ import store from './store';
 const List = React.memo(({todoItems}) => {
     const listItems = todoItems.map((item, index) =>
         <TodoItem
-            key={String(item || "")}
-            value={item}
+            key={String(item.id || "")}
+            item={item}
             index={index}
             />
     );
@@ -18,6 +18,12 @@ const List = React.memo(({todoItems}) => {
                     {listItems}
                     <div className='todo-footer'>
                         <div>{store.unfinishedCount} items left</div>
+                        <div className='filter'>
+                            <button onClick={() => store.updateFilter('all')}>All</button>
+                            <button onClick={() => store.updateFilter('active')}>Active</button>
+                            <button onClick={() => store.updateFilter('completed')}>Completed</button>
+                        </div>
+                        {store.showButtonClearAll() ? <button onClick={store.clearCompleted}>Clear all</button> : ''}
                     </div>
                 </ul> : null
             }
