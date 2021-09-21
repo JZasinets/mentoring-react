@@ -1,13 +1,9 @@
 import React from 'react';
-import { useCallback } from 'react';
+import store from './store';
 
-const AddItem = React.memo(({ addTodoItem }) => {
-    const editTodoList = useCallback(() => {
-        return addTodoItem;
-    }, [addTodoItem])
-
+const AddItem = React.memo(() => {
     return (
-        <form onSubmit={editTodoList()}>
+        <form onSubmit={store.addTodoItem}>
             <input type='text' name='itemListValue' className='todo-create' placeholder='What needs to be done?'/>
         </form>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useCallback } from 'react';
+import store from './store';
 
-const TodoItem = React.memo(({value, complete, deleteTodoItem, editDoubleClick, isEdit, editTodoItem}) => {
+const TodoItem = React.memo(({value, index}) => {
     return (
         <li className='list-item'>
             <div className='item-wrapper'>
@@ -9,15 +9,15 @@ const TodoItem = React.memo(({value, complete, deleteTodoItem, editDoubleClick, 
                     type="checkbox"
                     className='input-item'
                     checked={TodoItem.complete}
-                    onChange={() => complete(this.TodoItem.item)}
+                    onChange={() => store.complete(this.TodoItem.item)}
                     />
                 {
-                    Boolean(isEdit) ?
+                    store.isEdit ?
                         <input value={value} name='editListValue' autoFocus/>
                         :
-                        <label className='label-item' onDoubleClick={editDoubleClick}>{value}</label>
+                        <label className='label-item' onDoubleClick={() => store.editDoubleClick(index)}>{value}</label>
                 }
-                <button className='button-item' onClick={deleteTodoItem}>x</button>
+                <button className='button-item' onClick={() => store.deleteTodoItem(index)}>x</button>
             </div>
         </li>
     );

@@ -1,25 +1,23 @@
 import React from 'react';
-import TodoItem from './listItem'
+import TodoItem from './listItem';
+import store from './store';
 
-const List = React.memo(({ todoItems, unfinishedCount, complete, deleteTodoItem, editDoubleClick, isEdit }) => {
+const List = React.memo(({todoItems}) => {
     const listItems = todoItems.map((item, index) =>
         <TodoItem
             key={String(item || "")}
             value={item}
-            deleteTodoItem={() => deleteTodoItem(index)}
-            editDoubleClick={() => editDoubleClick(index)}
-            isEdit={isEdit}
-            complete={complete}
+            index={index}
             />
     );
 
     return (
         <>
-            { Boolean(todoItems.length > 0) ?
+            { Boolean(store.todoItems.length > 0) ?
                 <ul className='list-wrapper'>
                     {listItems}
                     <div className='todo-footer'>
-                        <div>{unfinishedCount} items left</div>
+                        <div>{store.unfinishedCount} items left</div>
                     </div>
                 </ul> : null
             }

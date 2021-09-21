@@ -1,21 +1,13 @@
-import { makeObservable, observable, action, computed } from 'mobx';
-import { create, persist } from 'mobx-persist'
+import { makeAutoObservable } from 'mobx';
+// import { create, persist } from 'mobx-persist'
 
 class TodoStore {
     todoItems = [];
     count = 0;
     isEdit = false;
 
-    constructor() {
-        makeObservable(this, {
-            todoItems: observable,
-            addTodoItem: action,
-            deleteTodoItem: action,
-            editDoubleClick: action,
-            unfinishedCount: computed,
-            isEdit: observable,
-            complete: computed,
-        });
+    constructor(arg) {
+        makeAutoObservable(this);
     }
 
     get unfinishedCount() {
@@ -49,9 +41,11 @@ class TodoStore {
     }
 }
 
-const hydrate = create({
-    storage: TodoStore,
-    jsonify: true
-})
+// const hydrate = create({
+//     storage: TodoStore,
+//     jsonify: true
+// })
 
-export default TodoStore;
+const store = new TodoStore();
+
+export default store;
