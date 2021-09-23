@@ -3,6 +3,26 @@ import store from './store';
 import { observer } from "mobx-react";
 
 const TodoItem = ({item, index}) => {
+    const completedTodoItem = () => {
+        store.completedTodo(item.id)
+    }
+
+    const newTodoValue = (event) => {
+        store.getNewTodoValue(event.target.value, item.id)
+    }
+
+    const addKeyPress = (event) => {
+        store.addChangeItemValue(event, item.id)
+    }
+
+    const doubleClickFunction = () => {
+        store.editDoubleClick(item.id)
+    }
+
+    const deleteTodoItemFunction = () => {
+        store.deleteTodoItem(index)
+    }
+
     return (
         <li className='list-item' id={item.id}>
             <div className='item-wrapper'>
@@ -10,7 +30,7 @@ const TodoItem = ({item, index}) => {
                     type='checkbox'
                     className='input-item'
                     checked={item.complete}
-                    onChange={() => store.completedTodo(item.id)}
+                    onChange={completedTodoItem}
                     />
                 {
                     item.isEdit ?
@@ -18,18 +38,18 @@ const TodoItem = ({item, index}) => {
                             type='text'
                             value={item.itemValue}
                             name='editListValue'
-                            onChange={(event) => store.getNewTodoValue(event.target.value, item.id)}
-                            onKeyPress={(event) => store.addChangeItemValue(event, item.id)}
+                            onChange={newTodoValue}
+                            onKeyPress={addKeyPress}
                             autoFocus/>
                         :
                         <label
                             className={`label-item ${(item.complete) ? 'item-complete' : ''}`}
-                            onDoubleClick={() => store.editDoubleClick(item.id)}
+                            onDoubleClick={doubleClickFunction}
                             >
                             {item.itemValue}
                         </label>
                 }
-                <button className='button-item' onClick={() => store.deleteTodoItem(index)}>x</button>
+                <button className='button-item' onClick={deleteTodoItemFunction}>x</button>
             </div>
         </li>
     );

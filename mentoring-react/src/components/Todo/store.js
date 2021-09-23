@@ -20,21 +20,26 @@ class TodoStore {
     }
 
     get getFilter() {
-        if (this.filter === 'all') return this.todoItems;
-        if (this.filter === 'active') return this.todoItems.filter(todo => !todo.complete);
-        if (this.filter === 'completed') return this.todoItems.filter(todo => todo.complete);
-
-        return this.todoItems;
+        switch(this.filter) {
+            case 'all':
+                return this.todoItems;
+            case 'active':
+                return this.todoItems.filter(todo => !todo.complete);
+            case 'completed':
+                return this.todoItems.filter(todo => todo.complete);
+            default:
+                return this.todoItems;
+        }
     }
 
     addTodoItem = (event) => {
         event.preventDefault();
-        const newItem = ({
+        const newItem = {
             itemValue: event.target.itemListValue.value,
             complete: false,
             id: nextId(),
             isEdit: false,
-        })
+        }
         if(newItem.itemValue === '') return;
         this.todoItems = [...this.todoItems, newItem];
         event.target.itemListValue.value = '';
