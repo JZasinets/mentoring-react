@@ -1,7 +1,8 @@
 import React from 'react';
 import store from './store';
+import { observer } from "mobx-react";
 
-const AddItem = React.memo(() => {
+const AddItem = () => {
     return (
         <div className='todo-input'>
             <button className='button-all' onClick={store.completedAll}>✓</button>
@@ -10,6 +11,6 @@ const AddItem = React.memo(() => {
             </form>
         </div>
     )
-})
+}
 
-export default AddItem;
+export default observer(AddItem);

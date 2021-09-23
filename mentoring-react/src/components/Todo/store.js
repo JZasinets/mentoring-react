@@ -1,14 +1,26 @@
 import { makeAutoObservable } from 'mobx';
-// import { create, persist } from 'mobx-persist'
 import nextId from "react-id-generator";
+import { makePersistable } from 'mobx-persist-store';
 
 class TodoStore {
     todoItems = [];
-    isEdit = false;
     filter = 'all';
 
     constructor(arg) {
         makeAutoObservable(this);
+        makePersistable(this, { name: 'TodoStore', properties: ['todoItems'], storage: window.localStorage });
+    }
+
+    clearStore = () => {
+        localStorage.clear();
+    }
+
+    filterTodoList = (filter) => {
+        this.filter = filter;
+        if (this.filter === 'all') return this.todoItems;
+        if (this.filter === 'completed') return this.todoItems.filter(item => item.complete);
+        if (this.filter === 'active') return this.todoItems.filter(item => !item.complete);
+        return this.todoItems;
     }
 
     addTodoItem = (event) => {
@@ -17,6 +29,7 @@ class TodoStore {
             itemValue: event.target.itemListValue.value,
             complete: false,
             id: nextId(),
+            isEdit: false,
         })
         if(newItem.itemValue === '') return;
         this.todoItems = [...this.todoItems, newItem];
@@ -28,9 +41,7 @@ class TodoStore {
     }
 
     completedTodo = (id) => {
-        const todoIndex = this.todoItems.findIndex(item => item.id === id);
-        this.todoItems[todoIndex].complete = !this.todoItems[todoIndex].complete;
-        this.todoItems = [...this.todoItems]
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, complete: !item.complete } : item)
     }
 
     completedAll = () => {
@@ -54,29 +65,21 @@ class TodoStore {
         this.todoItems = completeTodos;
     }
 
-    editDoubleClick = (item, inputValue) => {
-        this.isEdit = true;
-        console.log('double click')
-        if (inputValue === '') {
-              this.deleteTodoItem(item)
-        } else {
-            this.findTodo(item).inputValue = inputValue;
-            return this.isEdit = false;
-        }
+    editDoubleClick = (id) => {
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, isEdit: !item.isEdit } : item)
+    }
+
+    getNewTodoValue = (value, id) => {
+        if(value === '') return;
+        return this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, itemValue: value } : item)
+    }
+
+    addChangeItemValue = (event, id) => {
+        if (event.key === 'Enter') this.editDoubleClick(id);
     }
 
     get unfinishedCount() {
         return this.todoItems.filter(item => !item.complete).length;
-    }
-
-    filterTodoList = (item) => {
-        if (this.filter = 'completed') return item.complete;
-        if (this.filter = 'active') return !item.complete;
-        return true;
-    }
-
-    updateFilter = (filter) => {
-        this.filter = filter;
     }
 
     showButtonClearAll = () => {

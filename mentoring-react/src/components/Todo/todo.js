@@ -11,8 +11,9 @@ class Todo extends React.Component {
                 <div className='todo-header'>todos</div>
                 <div className='todo-list'>
                     <AddItem />
-                    <List todoItems={store.todoItems} />
+                    <List />
                 </div>
+                <button onClick={store.clearStore}>Clear Store</button>
             </div>
         )
     }

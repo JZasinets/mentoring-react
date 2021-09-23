@@ -1,19 +1,26 @@
 import React from 'react';
 import store from './store';
+import { observer } from "mobx-react";
 
-const TodoItem = React.memo(({item, index}) => {
+const TodoItem = ({item, index}) => {
     return (
         <li className='list-item' id={item.id}>
             <div className='item-wrapper'>
                 <input
-                    type="checkbox"
+                    type='checkbox'
                     className='input-item'
                     checked={item.complete}
                     onChange={() => store.completedTodo(item.id)}
                     />
                 {
-                    store.isEdit ?
-                        <input value={item.itemValue} name='editListValue' autoFocus/>
+                    item.isEdit ?
+                        <input
+                            type='text'
+                            value={item.itemValue}
+                            name='editListValue'
+                            onChange={(event) => store.getNewTodoValue(event.target.value, item.id)}
+                            onKeyPress={(event) => store.addChangeItemValue(event, item.id)}
+                            autoFocus/>
                         :
                         <label
                             className={`label-item ${(item.complete) ? 'item-complete' : ''}`}
@@ -26,6 +33,6 @@ const TodoItem = React.memo(({item, index}) => {
             </div>
         </li>
     );
-})
+}
 
-export default TodoItem;
+export default observer(TodoItem);

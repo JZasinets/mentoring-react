@@ -7,7 +7,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "mobx": "^6.3.3",
-    "mobx-persist": "^0.4.1",
+    "mobx-persist-store": "^1.0.4",
     "mobx-react": "^7.2.0",
     "mobx-react-devtools": "^6.1.1",
     "react": "^17.0.2",
