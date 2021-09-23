@@ -5,7 +5,6 @@ import { makePersistable } from 'mobx-persist-store';
 class TodoStore {
     todoItems = [];
     filter = 'all';
-    filteredTodoList = [];
 
     constructor(arg) {
         makeAutoObservable(this);
@@ -21,11 +20,11 @@ class TodoStore {
     }
 
     get getFilter() {
-        if (this.filter === 'all') return this.filteredTodoList = this.todoItems;
-        if (this.filter === 'active') return this.filteredTodoList = this.todoItems.filter(todo => !todo.complete);
-        if (this.filter === 'completed') return this.filteredTodoList = this.todoItems.filter(todo => todo.complete);
+        if (this.filter === 'all') return this.todoItems;
+        if (this.filter === 'active') return this.todoItems.filter(todo => !todo.complete);
+        if (this.filter === 'completed') return this.todoItems.filter(todo => todo.complete);
 
-        return this.filteredTodoList = this.todoItems;
+        return this.todoItems;
     }
 
     addTodoItem = (event) => {
