@@ -4,7 +4,7 @@ import store from './store';
 import { observer } from "mobx-react";
 
 const List = () => {
-    const listItems = store.todoItems.map((item, index) =>
+    const listItems = store.getFilter.map((item, index) =>
         <TodoItem
             key={String(item.id || "")}
             item={item}
