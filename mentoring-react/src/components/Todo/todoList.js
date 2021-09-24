@@ -17,17 +17,17 @@ const List = () => {
 //         store.filterTodoList(filter)
 //     }, [])
 
-    const firstFilter = () => {
+    const firstFilter = useCallback(() => {
         store.filterTodoList('all')
-    }
+    }, [])
 
-    const secondFilter = () => {
+    const secondFilter = useCallback(() => {
         store.filterTodoList('active')
-    }
+    }, [])
 
-    const thirdFilter = () => {
+    const thirdFilter = useCallback(() => {
         store.filterTodoList('completed')
-    }
+    }, [])
 
     return (
         <>
