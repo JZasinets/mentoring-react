@@ -1,27 +1,28 @@
 import React from 'react';
 import store from './store';
 import { observer } from "mobx-react";
+import { useCallback } from 'react';
 
 const TodoItem = ({item, index}) => {
-    const completedTodoItem = () => {
+    const completedTodoItem = useCallback(() => {
         store.completedTodo(item.id)
-    }
+    }, [])
 
-    const newTodoValue = (event) => {
+    const newTodoValue = useCallback((event) => {
         store.getNewTodoValue(event.target.value, item.id)
-    }
+    }, [])
 
-    const addKeyPress = (event) => {
+    const addKeyPress = useCallback((event) => {
         store.addChangeItemValue(event, item.id)
-    }
+    }, [])
 
-    const doubleClickFunction = () => {
+    const doubleClickFunction = useCallback(() => {
         store.editDoubleClick(item.id)
-    }
+    }, [])
 
-    const deleteTodoItemFunction = () => {
+    const deleteTodoItemFunction = useCallback(() => {
         store.deleteTodoItem(index)
-    }
+    }, [])
 
     return (
         <li className='list-item' id={item.id}>
