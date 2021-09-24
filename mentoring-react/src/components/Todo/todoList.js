@@ -13,10 +13,6 @@ const List = () => {
             />
     );
 
-//     const filterList = useCallback((filter) => () => {
-//         store.filterTodoList(filter)
-//     }, [])
-
     const firstFilter = useCallback(() => {
         store.filterTodoList('all')
     }, [])
@@ -40,7 +36,6 @@ const List = () => {
                             <button onClick={firstFilter}>All</button>
                             <button onClick={secondFilter}>Active</button>
                             <button onClick={thirdFilter}>Completed</button>
-{/*                             <button onClick={filterList('all')}>All</button> */}
                         </div>
                         {store.showButtonClearAll() ? <button onClick={store.clearCompleted}>Clear all</button> : ''}
                     </div>

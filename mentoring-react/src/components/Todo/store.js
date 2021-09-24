@@ -100,11 +100,6 @@ class TodoStore {
     }
 }
 
-// const hydrate = create({
-//     storage: TodoStore,
-//     jsonify: true
-// })
-
 const store = new TodoStore();
 
 export default store;
