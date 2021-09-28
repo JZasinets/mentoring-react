@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import nextId from "react-id-generator";
 import { makePersistable } from 'mobx-persist-store';
+import { useSpring } from 'react-spring';
 
 class TodoStore {
     todoItems = [];
@@ -39,6 +40,7 @@ class TodoStore {
             complete: false,
             id: nextId(),
             isEdit: false,
+            showRectangle: false,
         }
         if(newItem.itemValue === '') return;
         this.todoItems = [...this.todoItems, newItem];
@@ -98,6 +100,14 @@ class TodoStore {
     clearCompleted = () => {
         return this.todoItems = this.todoItems.filter(item => !item.complete);
     }
+
+    getGreenRectangle = () => useSpring({
+        from: { opacity: 0, height: 0 },
+        to: {
+            opacity: this.showRectangle ? 1 : 0,
+            height: this.showRectangle ? 10 : 0
+        }
+    })
 }
 
 const store = new TodoStore();

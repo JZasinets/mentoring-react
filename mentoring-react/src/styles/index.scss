@@ -171,6 +171,7 @@ ol, ul {
     &-list {
         box-shadow: 0px 8px 27px 3px rgba(34, 60, 80, 0.2);
         width: 100%;
+        margin-bottom: 30px;
     }
 
     .todo-create {
@@ -229,6 +230,7 @@ ol, ul {
     padding: 0 15px;
     min-width: 80%;
     color: black;
+    transition: color 1s;
 }
 
 .item-complete {
@@ -239,4 +241,56 @@ ol, ul {
 .todo-footer {
     display: flex;
     justify-content: space-around;
+    height: 30px;
+
+    .filter,
+    .clear-button {
+        position: relative;
+    }
+
+    .clear-button,
+    .filter button {
+        cursor: pointer;
+    }
+}
+
+.todo-footer::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 30px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(0, 0, 0, 0.2),
+    0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+//Animation
+.item-animate-enter {
+    opacity: 0;
+    transform: translateY(-40px)
+}
+
+.item-animate-enter-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition: all 500ms ease-in;
+}
+
+.item-animate-exit {
+    opacity: 1;
+    transform: translate(0, 0)
+}
+
+.item-animate-exit-active {
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: all 500ms ease-in;
+}
+
+.green-rectangle {
+    width: 100%;
+    height: 10px;
+    color: green;
 }
