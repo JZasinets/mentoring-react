@@ -40,7 +40,7 @@ class TodoStore {
             complete: false,
             id: nextId(),
             isEdit: false,
-            showRectangle: false,
+            visibleRectangle: false,
         }
         if(newItem.itemValue === '') return;
         this.todoItems = [...this.todoItems, newItem];
@@ -101,13 +101,9 @@ class TodoStore {
         return this.todoItems = this.todoItems.filter(item => !item.complete);
     }
 
-    getGreenRectangle = () => useSpring({
-        from: { opacity: 0, height: 0 },
-        to: {
-            opacity: this.showRectangle ? 1 : 0,
-            height: this.showRectangle ? 10 : 0
-        }
-    })
+    showRectangle = (id) => {
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: !item.visibleRectangle } : item)
+    }
 }
 
 const store = new TodoStore();

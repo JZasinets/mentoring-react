@@ -8,7 +8,16 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 const List = () => {
     const listItems = store.getFilter.map((item, index) => {
         return (
-            <CSSTransition key={String(item.id || "")} timeout={500} classNames="item-animate">
+            <CSSTransition
+                in={true}
+                key={String(item.id || "")}
+                timeout={500}
+                classNames="item-animate"
+                onExit={() => {
+                    console.log("onExit");
+                }}
+                onmountOnExit
+            >
                 <TodoItem
                     item={item}
                     index={index}

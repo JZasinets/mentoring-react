@@ -2,7 +2,7 @@ import React from 'react';
 import store from './store';
 import { observer } from "mobx-react";
 import { useCallback } from 'react';
-import { useSpring, animated }from 'react-spring';
+import { CSSTransition } from 'react-transition-group';
 
 const TodoItem = ({item, index}) => {
     const completedTodoItem = useCallback(() => {
@@ -25,13 +25,21 @@ const TodoItem = ({item, index}) => {
         store.deleteTodoItem(index)
     }, [])
 
-    const addGreenRectangle = () => {
-        store.greenRecatangle();
+    const getRectangle = () => {
+        store.showRectangle(item.id);
     }
 
     return (
         <li className='list-item' id={item.id}>
-            <animated.div className="green-rectangle" style={addGreenRectangle}></animated.div>
+            <CSSTransition
+                in={item.visibleRectangle}
+                timeout={1000}
+                classNames='visible'
+                mountOnEnter
+                unmountOnExit
+            >
+                <div className="rectangle"></div>
+            </CSSTransition>
             <div className='item-wrapper'>
                 <input
                     type='checkbox'
@@ -56,7 +64,7 @@ const TodoItem = ({item, index}) => {
                             {item.itemValue}
                         </label>
                 }
-                <button className='button-item' onClick={addGreenRectangle}>✓</button>
+                <button className='button-item' onClick={getRectangle}>✓</button>
                 <button className='button-item' onClick={deleteTodoItemFunction}>x</button>
             </div>
         </li>
