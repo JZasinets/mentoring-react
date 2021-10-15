@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Weather from './components/Weather/weather';
 import Todo from './components/Todo/todo';
-import BounceLoader from "react-spinners/BounceLoader";
+import Spinner from './spinner';
 
 class App extends React.Component {
     state = {
@@ -23,7 +23,7 @@ class App extends React.Component {
             <>
                 {this.state.loading ?
                     <div className="spinner">
-                        <BounceLoader />
+                        <Spinner />
                     </div>
                     :
                     <BrowserRouter>

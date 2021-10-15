@@ -231,7 +231,7 @@ ol, ul {
         }
 
         .item-wrapper {
-            padding: 15px;
+            padding: 15px
         }
     }
 }
@@ -277,18 +277,21 @@ ol, ul {
 }
 
 //Animation
-@mixin animate($opacity, $transform) {
+@mixin animate($opacity, $margin) {
     opacity: $opacity;
-    transform: $transform;
+    margin-top: $margin;
 }
 
 .item-animate-enter {
-    @include animate(0, translateY(-40px));
+    @include animate(0, -60px);
 }
 
 .item-animate-enter-active,
 .item-animate-exit {
-    @include animate(1, translate(0, 0));
+    @include animate(1, 0);
+    background: left linear-gradient(to right, white 50%, red 50%);
+    background-size: 200% 100%;
+    transition: all 2s ease;
 }
 
 .item-animate-enter-active {
@@ -296,27 +299,9 @@ ol, ul {
 }
 
 .item-animate-exit-active {
-    @include animate(0, translateY(-40px));
-    transition: all 500ms ease-in;
-}
-
-.visible-enter,
-.visible-exit,
-.visible-enter-done {
-    @include animate(0, translateX(-500px));
-}
-
-.visible-enter-active,
-.visible-exit-active {
-    @include animate(1, translate(0, 0));
-    transition: all 500ms ease-in;
-}
-
-.rectangle {
-    width: 500px;
-    height: 60px;
-    background-color: var(--info-color);
-    position: absolute;
+    @include animate(0, -60px);
+    background-position: right;
+    transition: background-position .5s ease, opacity 2.5s ease-in, margin-top 2.5s ease-in;
 }
 
 .main-input-enter {
@@ -328,4 +313,20 @@ ol, ul {
 .main-input-enter-active {
     box-shadow: 0px 0px 48px 12px rgba(44, 192, 199, 1);
     transition: all 500ms;
+}
+
+@keyframes addGreenBackground {
+    from {
+        background-position: right;
+    }
+    to {
+        background-position: left;
+    }
+
+}
+
+.check {
+    background: right linear-gradient(to left, white 50%, var(--info-color) 50%);
+    background-size: 200% 100%;
+    animation: addGreenBackground 1s linear;
 }

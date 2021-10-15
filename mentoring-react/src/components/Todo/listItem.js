@@ -2,7 +2,6 @@ import React from 'react';
 import store from './store';
 import { observer } from "mobx-react";
 import { useCallback } from 'react';
-import { CSSTransition } from 'react-transition-group';
 
 const TodoItem = ({item, index}) => {
     const completedTodoItem = useCallback(() => {
@@ -30,16 +29,7 @@ const TodoItem = ({item, index}) => {
     }
 
     return (
-        <li className='list-item' id={item.id}>
-            <CSSTransition
-                in={item.visibleRectangle}
-                timeout={1000}
-                classNames='visible'
-                mountOnEnter
-                unmountOnExit
-            >
-                <div className="rectangle"></div>
-            </CSSTransition>
+        <li className={`list-item ${item.visibleRectangle === true ? 'check': ''}`} id={item.id}>
             <div className='item-wrapper'>
                 <input
                     type='checkbox'

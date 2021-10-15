@@ -5,20 +5,20 @@ const Spinner = () => {
     const animation = {
         transform: Radium.keyframes({
             '0%': {
-                transform: 'rotate(0deg) scale(0.7)',
+                transform: 'rotate(0deg)',
             },
             '50%': {
-                transform: 'rotate(180deg) scale(1)',
+                transform: 'rotate(180deg)',
             },
             '100%': {
-                transform: 'rotate(360deg) scale(0.7)',
+                transform: 'rotate(360deg)',
             }
         })
     }
 
     const styles = {
         image: {
-            animation: 'x 5s linear infinite',
+            animation: 'x 2s linear infinite',
             animationName: animation.transform
         }
     }
@@ -26,7 +26,7 @@ const Spinner = () => {
     return (
         <StyleRoot>
             <div className='todo-input' style={styles.image}>
-                <img src='image/loading.jpg' />
+                <img src='https://kanzoboz.ru/data/images/623489.png' />
             </div>
         </StyleRoot>
     )

@@ -11,11 +11,8 @@ const List = () => {
             <CSSTransition
                 in={true}
                 key={String(item.id || "")}
-                timeout={500}
+                timeout={{enter: 500, exit: 3000}}
                 classNames="item-animate"
-                onExit={() => {
-                    console.log("onExit");
-                }}
                 onmountOnExit
             >
                 <TodoItem
