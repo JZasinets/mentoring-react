@@ -5,7 +5,6 @@ import { makePersistable } from 'mobx-persist-store';
 class TodoStore {
     todoItems = [];
     filter = 'all';
-    loading = true;
 
     constructor(arg) {
         makeAutoObservable(this);
@@ -103,12 +102,6 @@ class TodoStore {
 
     showRectangle = (id) => {
         this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: !item.visibleRectangle } : item)
-    }
-
-    getLoadingDelay = () => {
-        setTimeout(() => {
-            this.loading = false;
-        }, 3000);
     }
 }
 

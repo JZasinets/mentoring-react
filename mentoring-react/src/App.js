@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles/index.scss';
-import store from '../src/components/Todo/store';
 import Game from './components/Game/game';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
@@ -9,14 +8,20 @@ import Todo from './components/Todo/todo';
 import BounceLoader from "react-spinners/BounceLoader";
 
 class App extends React.Component {
+    state = {
+        loading: true
+    }
+
     componentDidMount = () => {
-        store.getLoadingDelay();
+        setTimeout(() => {
+            this.setState({loading: false})
+        }, 3000);
     }
 
     render = () => {
         return (
             <>
-                {store.loading ?
+                {this.state.loading ?
                     <div className="spinner">
                         <BounceLoader />
                     </div>
