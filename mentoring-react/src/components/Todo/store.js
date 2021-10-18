@@ -101,7 +101,12 @@ class TodoStore {
     }
 
     showRectangle = (id) => {
-        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: !item.visibleRectangle } : item)
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: true } : item)
+        setTimeout(() => {this.changeState(id)}, 1000);
+    }
+
+    changeState = (id) => {
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: false } : item)
     }
 }
 
