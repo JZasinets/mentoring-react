@@ -1,4 +1,4 @@
-import { makeAutoObservable, autorun } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import nextId from "react-id-generator";
 import { makePersistable } from 'mobx-persist-store';
 
@@ -7,16 +7,13 @@ class TodoStore {
     filter = 'all';
     loading = true;
 
-    constructor(arg) {
+    constructor() {
         makeAutoObservable(this);
         makePersistable(this, { name: 'TodoStore', properties: ['todoItems'], storage: window.localStorage });
-        // setTimeout(() => { this.loading = false }, 3000);
     }
 
     startApplication = () => {
-        setTimeout(() => {
-            this.loading = false
-        }, 3000)
+        this.loading = false;
     }
 
     clearStore = () => {

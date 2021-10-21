@@ -10,28 +10,22 @@ import store from "./components/Todo/store";
 import { observer } from "mobx-react";
 
 class App extends React.Component {
-    // state = {
-    //     loading: true
-    // }
-    //
-    // componentDidMount = () => {
-    //     this.timer = setTimeout(() => {
-    //         this.setState({loading: false})
-    //     }, 3000);
-    // }
-    //
-    // componentWillUnmount() {
-    //     clearInterval(this.timer);
-    // }
-    componentDidMount() {
-        store.startApplication();
+    componentDidMount = () => {
+        this.timer = setTimeout(() => {
+            store.startApplication();
+        }, 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 
     render = () => {
         return (
             <>
                 {/*поиск  __DEV__ (react dev flag)*/}
-                {store.loading && (process.env.NODE_ENV !== "production") ?
+                {/*{store.loading && (process.env.NODE_ENV !== "production") ?*/}
+                {store.loading ?
                     <div className="spinner">
                         <Spinner />
                     </div>

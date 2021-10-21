@@ -38,8 +38,6 @@ const List = () => {
         store.filterTodoList('completed')
     }, [])
 
-    if (store.todoItems.length === 0) return null;
-
     return (
         <TransitionGroup component='ul' className='list-wrapper'>
             {listItems()}
