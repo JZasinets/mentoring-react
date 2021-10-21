@@ -6,22 +6,32 @@ import Navbar from './components/navbar';
 import Weather from './components/Weather/weather';
 import Todo from './components/Todo/todo';
 import Spinner from './spinner';
+import store from "./components/Todo/store";
+import { observer } from "mobx-react";
 
 class App extends React.Component {
-    state = {
-        loading: true
-    }
-
-    componentDidMount = () => {
-        setTimeout(() => {
-            this.setState({loading: false})
-        }, 3000);
+    // state = {
+    //     loading: true
+    // }
+    //
+    // componentDidMount = () => {
+    //     this.timer = setTimeout(() => {
+    //         this.setState({loading: false})
+    //     }, 3000);
+    // }
+    //
+    // componentWillUnmount() {
+    //     clearInterval(this.timer);
+    // }
+    componentDidMount() {
+        store.startApplication();
     }
 
     render = () => {
         return (
             <>
-                {this.state.loading ?
+                {/*поиск  __DEV__ (react dev flag)*/}
+                {store.loading && (process.env.NODE_ENV !== "production") ?
                     <div className="spinner">
                         <Spinner />
                     </div>
@@ -40,4 +50,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default observer(App);
