@@ -23,9 +23,7 @@ class App extends React.Component {
     render = () => {
         return (
             <>
-                {/*поиск  __DEV__ (react dev flag)*/}
-                {/*{store.loading && (process.env.NODE_ENV !== "production") ?*/}
-                {store.loading ?
+                {store.loading && (process.env.NODE_ENV === 'production') ?
                     <div className="spinner">
                         <Spinner />
                     </div>
