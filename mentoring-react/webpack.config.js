@@ -1,4 +1,3 @@
-
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -6,6 +5,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, "/dist"),
+        publicPath: "/",
         filename: "index-bundle.js"
     },
     module: {
@@ -16,8 +16,8 @@ module.exports = {
                 use: ["babel-loader"]
             },
             {
-                test: /\.scss$/,
-                use: ["style-loader", "css-loader"]
+                test: /\.(sass|scss)$/,
+                use: ["style-loader", "css-loader","sass-loader"]
             }
         ]
     },
@@ -25,5 +25,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         })
-    ]
+    ],
+    devServer: {
+        historyApiFallback: true,
+    },
 };
