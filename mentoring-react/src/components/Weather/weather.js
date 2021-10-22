@@ -46,7 +46,7 @@ class Weather extends React.Component {
         if (countryCode.length > 2 ) return checkError('Код страны не может содержать больше 2-х букв');
         if (countryCode !== countryCode.toUpperCase()) return checkError('Код страны введён не прописными буквами');
 
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&lang=ru&appid=136a1286295ce51ceabf7e5462f4a04a`);;
+        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&lang=ru&appid=136a1286295ce51ceabf7e5462f4a04a`);
         const data = await response.json()
         try {
             this.setState({

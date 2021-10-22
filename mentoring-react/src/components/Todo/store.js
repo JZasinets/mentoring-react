@@ -5,10 +5,15 @@ import { makePersistable } from 'mobx-persist-store';
 class TodoStore {
     todoItems = [];
     filter = 'all';
+    loading = true;
 
-    constructor(arg) {
+    constructor() {
         makeAutoObservable(this);
         makePersistable(this, { name: 'TodoStore', properties: ['todoItems'], storage: window.localStorage });
+    }
+
+    startApplication = () => {
+        this.loading = false;
     }
 
     clearStore = () => {
@@ -39,6 +44,7 @@ class TodoStore {
             complete: false,
             id: nextId(),
             isEdit: false,
+            visibleRectangle: false,
         }
         if(newItem.itemValue === '') return;
         this.todoItems = [...this.todoItems, newItem];
@@ -97,6 +103,15 @@ class TodoStore {
 
     clearCompleted = () => {
         return this.todoItems = this.todoItems.filter(item => !item.complete);
+    }
+
+    showRectangle = (id) => {
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: true } : item)
+        setTimeout(() => {this.changeState(id)}, 1000);
+    }
+
+    changeState = (id) => {
+        this.todoItems = this.todoItems.map((item) => item.id === id ? { ...item, visibleRectangle: false } : item)
     }
 }
 

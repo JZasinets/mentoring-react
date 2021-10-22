@@ -5,18 +5,23 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Weather from './components/Weather/weather';
 import Todo from './components/Todo/todo';
+import Spinner from './spinner';
+import { observer } from "mobx-react";
 
-const App = () => {
-    return (
-        <BrowserRouter>
-            <Navbar />
-            <div className="app-wrapper">
-                <Route path='/weather' component={Weather}/>
-                <Route path='/game' component={Game}/>
-                <Route path='/todo' component={Todo}/>
-            </div>
-        </BrowserRouter>
-    );
+class App extends React.Component {
+    render = () => {
+        return (
+            <BrowserRouter>
+                <Navbar />
+                <div className="app-wrapper">
+                    <Route path='/weather' component={Weather}/>
+                    <Route path='/game' component={Game}/>
+                    <Route path='/todo' component={Todo}/>
+                </div>
+                <Spinner />
+            </BrowserRouter>
+        )
+    }
 }
 
-export default App;
+export default observer(App);

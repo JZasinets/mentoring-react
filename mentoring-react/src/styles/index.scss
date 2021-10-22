@@ -171,6 +171,7 @@ ol, ul {
     &-list {
         box-shadow: 0px 8px 27px 3px rgba(34, 60, 80, 0.2);
         width: 100%;
+        margin-bottom: 30px;
     }
 
     .todo-create {
@@ -193,7 +194,7 @@ ol, ul {
 
     &-input {
         display: flex;
-        width: 100%;
+        //width: 100%;
 
         .button-all {
             width: 10%;
@@ -216,11 +217,14 @@ ol, ul {
     &-item {
         font-size: 24px;
         color: #d9d9d9;
-        padding: 15px;
         border-bottom: 1px solid #ededed;;
 
         &-wrapper {
             display: flex;
+        }
+
+        .item-wrapper {
+            padding: 15px
         }
     }
 }
@@ -229,6 +233,7 @@ ol, ul {
     padding: 0 15px;
     min-width: 80%;
     color: black;
+    transition: color 1s;
 }
 
 .item-complete {
@@ -239,4 +244,95 @@ ol, ul {
 .todo-footer {
     display: flex;
     justify-content: space-around;
+    height: 30px;
+
+    .filter,
+    .clear-button {
+        position: relative;
+    }
+
+    .clear-button,
+    .filter button {
+        cursor: pointer;
+    }
+}
+
+.todo-footer::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 30px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(0, 0, 0, 0.2),
+    0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+//Animation
+@mixin animate($opacity, $margin) {
+    opacity: $opacity;
+    margin-top: $margin;
+}
+
+.item-animate-enter {
+    @include animate(0, -60px);
+}
+
+.item-animate-enter-active,
+.item-animate-exit {
+    @include animate(1, 0);
+    background: left linear-gradient(to right, white 50%, red 50%);
+    background-size: 200% 100%;
+    transition: all 2s ease;
+}
+
+.item-animate-enter-active {
+    transition: all 500ms ease-in;
+}
+
+.item-animate-exit-active {
+    @include animate(0, -60px);
+    background-position: right;
+    transition: background-position .5s ease, opacity 2.5s ease-in, margin-top 2.5s ease-in;
+}
+
+.main-input-enter {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 48px 12px rgba(44, 83, 199, 1);
+}
+
+.main-input-enter-active {
+    box-shadow: 0px 0px 48px 12px rgba(44, 192, 199, 1);
+    transition: all 500ms;
+}
+
+@keyframes addGreenBackground {
+    from {
+        background-position: right;
+    }
+    to {
+        background-position: left;
+    }
+
+}
+
+.check {
+    background: right linear-gradient(to left, white 50%, var(--info-color) 50%);
+    background-size: 200% 100%;
+    animation: addGreenBackground 1s linear;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    z-index: 5;
 }

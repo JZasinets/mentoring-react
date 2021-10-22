@@ -24,8 +24,12 @@ const TodoItem = ({item, index}) => {
         store.deleteTodoItem(index)
     }, [])
 
+    const getRectangle = () => {
+        store.showRectangle(item.id);
+    }
+
     return (
-        <li className='list-item' id={item.id}>
+        <li className={`list-item ${item.visibleRectangle === true ? 'check': ''}`} id={item.id}>
             <div className='item-wrapper'>
                 <input
                     type='checkbox'
@@ -50,6 +54,7 @@ const TodoItem = ({item, index}) => {
                             {item.itemValue}
                         </label>
                 }
+                <button className='button-item' onClick={getRectangle}>✓</button>
                 <button className='button-item' onClick={deleteTodoItemFunction}>x</button>
             </div>
         </li>
